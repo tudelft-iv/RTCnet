@@ -1,6 +1,6 @@
 
 # Description
-This repository will contain the code used in our manuscript entitled
+This repository will contain the code of RTCnet from our manuscript entitled
 ***"CNN-based Road User Detection using the 3D Radar Cube"***.
 after it is accepted and published. The paper was submitted to Robotics and Automation Letters (RA-L).
 
