@@ -132,10 +132,6 @@ def main():
     test_with_nearby = False
     only_slow = False
     only_fast = False
-    # if "test_with_only_nearby" in cfg:
-    #     test_with_nearby = cfg["test_with_only_nearby"]
-    # else:
-    #     test_with_nearby = False
     if "rm_position" in cfg:
         rm_position = cfg['rm_position']
     else:
