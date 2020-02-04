@@ -36,7 +36,6 @@ from sklearn.utils.multiclass import unique_labels
 from copy import deepcopy
 import matplotlib
 font = {'family' : 'normal',
-        # 'weight' : 'bold',
         'size'   : 15}
 
 matplotlib.rc('font', **font)
@@ -60,7 +59,6 @@ def plot_confusion_matrix(confusion_matrix, classes,
     cm = confusion_matrix
     # Only use the labels that appear in the data
 
-    # if normalize:
     cm_norm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     cm_norm_col = cm.astype('float') / cm.sum(axis=0)
     print(cm)
@@ -98,38 +96,6 @@ def plot_confusion_matrix(confusion_matrix, classes,
                         ha="center", va="center",
                         color="white" if cm_norm[i, j] > thresh else "black")
 
-    # for i in range(cm.shape[0]):
-    #     for j in range(cm.shape[1]):
-    #         ax.text(j, i, "\n({:.2f})".format(cm_norm_col[i,j]), 
-    #                 ha="center", va="center",
-    #                 color="white" if cm_norm[i, j] > thresh else "black")
-    # if ax is None:
-        # fig.tight_layout()
     plt.tight_layout()
     return ax
 
-if __name__ == "__main__":
-    print(__doc__)
-    np.set_printoptions(precision=2)
-    methods = ["Schumann", "Prophet", "Low-level"]
-    confusion_matrices = [np.array([[55060,2110,1503,53],
-                                [7531,5946,611,33],
-                                [4560,248,2853,13],
-                                [1492,22,246,103]]),
-                        np.array([[55281,1664,1700,81],
-                                [7446,4712,1924,39],
-                                [4384,603,2651,36],
-                                [1494,51,223,95]]),
-                        np.array([[54785,2424,1477,40],
-                                [7979,5480,658,4],
-                                [3704,320,3604,46],
-                                [1144,33,598,88]])]
-
-    for method, cm in zip(methods, confusion_matrices):
-        # Plot non-normalized confusion matrix
-        plot_confusion_matrix(cm, classes=class_names,
-                            title='Confusion matrix, {}, without normalization'.format(method))
-
-
-
-        plt.show()

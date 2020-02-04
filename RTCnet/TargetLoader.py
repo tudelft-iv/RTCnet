@@ -229,33 +229,3 @@ class Permutation(object):
         feature[:, 2] = feature[:, 2] + np.random.random()*0.1-0.1
         return {"data":feature, "label":label}
 
-
-if __name__ == "__main__":
-    ## Test for data loader 
-    data_path = "/data/jiaaodong/conti_new/dataset1/data/target_data_1558958116/low"
-    batch_size = 32
-    to_tensor = ToTensor()
-    composed_trans = transforms.Compose([to_tensor])
-    target_dataset = TargetModeDataset(
-                data_path, composed_trans, 
-                mode='train', high_dims = 4, 
-                normalize = True, feature_type = 'low',
-                norms_path=data_path,
-                speed_limit=1,
-                dist_near= 1,
-                binary_class = False)
-    target_loader = DataLoader(target_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
-    train_iter = iter(target_loader)
-    sample = train_iter.next()
-    feature = sample['data']
-    # print(feature.shape)
-    label = sample['label']
-    # # print(feature.squeeze().size(), label.size())
-    # plt.figure(1)
-    # plt.scatter(feature[:,0,1], feature[:,0,0],c=label[:,0])
-    # plt.figure(2)
-    # plt.imshow(torch.cat([label.double(), feature.squeeze()], 1), interpolation="nearest", aspect='auto')
-    # plt.title("First Batch")
-    # plt.xticks(np.array([0,1,2,3,4,5,6,7,8]), ["label", "x","y","v","r" ,"rcs" ,"Var" ,"ang" ,"V"])
-    # plt.colorbar()
-    # plt.show()

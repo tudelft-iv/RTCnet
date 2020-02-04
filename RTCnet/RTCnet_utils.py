@@ -47,14 +47,10 @@ class Trainer(object):
     
     def _train_it(self, it, batch):
         self.model.train()
-        # self.model.zero_grad()
         self.optimizer.zero_grad()
         _, loss, res_dict = self._farward_pass(self.model, batch)
         loss.backward()
         self.optimizer.step()
-        #with torch.no_grad():
-        #    for param  in self.model.parameters():
-        #        param -= max(self.lr_clip, (5e-2)*(self.lr_decay_f**(it/self.lr_decay_step)))*param.grad
         return res_dict
 
     def _farward_pass(self, model, batch):
