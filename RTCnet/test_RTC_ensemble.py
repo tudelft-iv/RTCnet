@@ -21,7 +21,6 @@ import json
 # Modules from current project
 from TargetLoader import TargetModeDataset, ToTensor
 from RTCnet import RTCnetV4
-from plot_confusion_matrix import plot_confusion_matrix
 from RTCnet_utils import Tester, Tester_ensemble
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 result_DIR = osp.join(BASE_DIR, osp.pardir, 'results', 'RTCtrain_info')
@@ -327,10 +326,6 @@ def main():
     f1_score_all = f1_score(true_labels_all, pred_labels_all, average='macro')
     f1_score_individual = f1_score(true_labels_all, 
                             pred_labels_all, average=None)
-    fig, ax1=plt.subplots(figsize=(9, 7))
-    plot_confusion_matrix(confusion_mat, classes=class_names,
-                title='dataset: {}'.format( "test"), ax = ax1)
-    plt.savefig(osp.join(result_folder, 'confusion_mat_{}'.format("test")))
     with open(osp.join(result_folder, "f1score_{}.txt".format("test")),'a') as f:
         np.savetxt(f,np.reshape(f1_score_all, (1,-1)),fmt='%f')
         np.savetxt(f,np.reshape(f1_score_individual, (1,-1)),fmt='%f')
