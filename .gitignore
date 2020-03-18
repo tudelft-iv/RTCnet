@@ -100,5 +100,20 @@ venv.bak/
 # mkdocs documentation
 /site
 
+# unnecessary data
+*.vscode
+*.bag
+*.LLH
+*.hdf5
+*.npy
+*.pyc
+*.png
+*.h5
+*.jpg
+*.zip
+results/*
+dataset/*
+*.pth
+
 # mypy
 .mypy_cache/
