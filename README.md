@@ -1,7 +1,17 @@
 
 # Description
-This repository will contain the code of RTCnet from our manuscript entitled
-***"CNN-based Road User Detection using the 3D Radar Cube"*** after it is accepted and published. The paper was submitted to Robotics and Automation Letters (RA-L).
+This repository will contain the code of RTCnet from our paper entitled
+***"CNN-based Road User Detection using the 3D Radar Cube"***, by TU Delft, Intelligent Vehicles group (http://intelligentvehicles.org). The paper was accepted to Robotics and Automation Letters (RA-L) in 2020 January.
+
+See the publication here:   
+https://ieeexplore.ieee.org/document/8962258
+
+Here is a short presentation of the methodology:  
+https://www.youtube.com/watch?v=7HxevlFwLdw&
+
+and a short demo video of its performance:  
+https://www.youtube.com/watch?v=Ck5o7-0BMHA&
+
 
 # What is RTCnet?
 RTCnet is a radar based, single-frame, multi-class detection method for moving road users (pedestrian, cyclist, car), which utilizes low-level radar cube data.
@@ -9,11 +19,24 @@ The method provides class information both on the radar target- and object-level
 thereby capturing the motion of moving parts in the local velocity distribution. A Convolutional Neural Network (CNN) is proposed for this classification step. Afterwards, object proposals are generated with a class-specific clustering step, which not only considers the radar targets' positions and velocities, but their calculated class scores as well.
 
 # Citing information
-We will add citing information after publication.
-
+To cite this paper, please use the following Bibtex format:
+```
+@ARTICLE{8962258,
+author={A. {Palffy} and J. {Dong} and J. F. P. {Kooij} and D. M. {Gavrila}},
+journal={IEEE Robotics and Automation Letters},
+title={CNN Based Road User Detection Using the 3D Radar Cube},
+year={2020},
+volume={5},
+number={2},
+pages={1263-1270},
+keywords={Object detection;segmentation and categorization;sensor fusion;deep learning in robotics and automation},
+doi={10.1109/LRA.2020.2967272},
+ISSN={2377-3774},
+month={April},}
+```
 
 # Network Structure
-TO BE FILLED by the figure
+
 
 # Dataset
 The feature array for training is a numpy array, with n rows and m columns . Each row corresponds to a sample cropped from the entire radar cube by using radar target as ROI. Each column corresponds to a feature. If the cropped window size is 5 x 5 x 32 (range-angle-speed bins), there will be 800 features from the radar cube. In addition to the radar cube, the range, angle, radar cross section (RCS) and radial speed are appended, thus each sample has 804 features. 
