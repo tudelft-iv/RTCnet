@@ -1,0 +1,8 @@
+numpy
+matplotlib
+sklearn
+tqdm
+torch
+torchvision
+IPython
+pillow<7.0.0
