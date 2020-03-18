@@ -12,6 +12,14 @@ https://www.youtube.com/watch?v=7HxevlFwLdw&
 and a short demo video of its performance:  
 https://www.youtube.com/watch?v=Ck5o7-0BMHA&
 
+Example output at target level:  
+![](figures/cyc_ped.gif)  
+Red/Green stands for bike/pedestrian.  
+
+Example output at object level:  
+![](figures/ped_obj.gif)  
+
+All results are based on radar only.
 
 # What is RTCnet?
 RTCnet is a radar based, single-frame, multi-class detection method for moving road users (pedestrian, cyclist, car), which utilizes low-level radar cube data.
