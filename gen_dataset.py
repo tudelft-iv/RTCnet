@@ -53,8 +53,14 @@ def generate_dataset_single(num_features, num_samples):
     features_low_level = 3000 * np.random.rand(num_samples, 800)
     features = np.concatenate([features_x, features_y, features_v, features_rcs, features_low_level], axis=1)   
     labels = np.random.randint(4,size=(num_samples)) 
+    num_targets_per_frame = 20
+    num_frames = num_samples / num_targets_per_frame
+    frame_id = np.arange(num_frames + 1)
+    frame_id = np.repeat(frame_id, num_targets_per_frame)
+    frame_id = frame_id[:num_samples]
+    instance_id = labels = np.random.randint(6,size=(num_samples)) 
 
-    return features, labels
+    return features, labels, frame_id, instance_id
 
 
 if __name__ == "__main__":
@@ -63,9 +69,9 @@ if __name__ == "__main__":
     num_samples_train = 10000
     num_samples_val = 1000
     num_samples_test = 4000
-    features_train, labels_train = generate_dataset_single(num_features, num_samples_train)
-    features_val, labels_val = generate_dataset_single(num_features, num_samples_val)
-    features_test, labels_test = generate_dataset_single(num_features, num_samples_test)
+    features_train, labels_train, frame_id_train, instance_id_train  = generate_dataset_single(num_features, num_samples_train)
+    features_val, labels_val, frame_id_val, instance_id_val = generate_dataset_single(num_features, num_samples_val)
+    features_test, labels_test, frame_id_test, instance_id_test = generate_dataset_single(num_features, num_samples_test)
     
     """
     The meta data is used for configuration of the project. 
@@ -87,7 +93,7 @@ if __name__ == "__main__":
     "use_manual_annotation": True,
     "view_cluster": True,
     "viz_input": False,
-    "x_lim": 100,
+    "x_lim": 1000,
     "yaw_threshold": 100
     }
 
@@ -96,7 +102,11 @@ if __name__ == "__main__":
 
     np.save(osp.join(data_DIR, 'train','features.npy'), features_train)
     np.save(osp.join(data_DIR, 'train','labels.npy'), labels_train)
+    np.save(osp.join(data_DIR, 'train','frame_id.npy'), frame_id_train)
     np.save(osp.join(data_DIR, 'val','features.npy'), features_val)
     np.save(osp.join(data_DIR, 'val','labels.npy'), labels_val)
+    np.save(osp.join(data_DIR, 'val','frame_id.npy'), frame_id_val)
     np.save(osp.join(data_DIR, 'test','features.npy'), features_test)
     np.save(osp.join(data_DIR, 'test','labels.npy'), labels_test)
+    np.save(osp.join(data_DIR, 'test','frame_id.npy'), frame_id_test)
+    np.save(osp.join(data_DIR,'instance_id_test.npy'), instance_id_test)

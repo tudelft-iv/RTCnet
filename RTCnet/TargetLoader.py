@@ -50,7 +50,7 @@ class TargetModeDataset(Dataset):
         norms_path: string
                     The path for saving normalization parameters 
         speed_limit: float
-                     The limit for highest speed. Data with higher speed will be aborted
+                     The limit for highest speed. Data with higher speed will stay
         dist_near: float
                    Due to reflection of bumpers, the data that is too close can be filtered by the distance 
         binary_class: bool
