@@ -123,7 +123,7 @@ class TargetModeDataset(Dataset):
             if only_slow:
                 self.labels = self.labels[np.abs(self.features[:,2])<self.speed_upper_lim]
                 self.features = self.features[np.abs(self.features[:,2])<self.speed_upper_lim,:]
-            if only_slow:
+            if only_fast:
                 self.labels = self.labels[np.abs(self.features[:,2])>self.speed_lower_lim]
                 self.features = self.features[np.abs(self.features[:,2])>self.speed_lower_lim,:]
             self.features, self.labels = self.rm_static(self.features, self.labels)
@@ -153,7 +153,7 @@ class TargetModeDataset(Dataset):
             if only_slow:
                 self.labels = self.labels[np.abs(self.features[:,2])<self.speed_upper_lim]
                 self.features = self.features[np.abs(self.features[:,2])<self.speed_upper_lim,:]
-            if only_slow:
+            if only_fast:
                 self.labels = self.labels[np.abs(self.features[:,2])>self.speed_lower_lim]
                 self.features = self.features[np.abs(self.features[:,2])>self.speed_lower_lim,:]
             self.features, self.labels = self.rm_static(self.features, self.labels)
