@@ -50,7 +50,7 @@ def generate_dataset_single(num_features, num_samples):
     features_y = 100 * np.random.rand(num_samples,1) - 50
     features_v = 30 * np.random.rand(num_samples,1) - 15
     features_rcs = 5 * np.random.rand(num_samples,1) 
-    features_low_level = 3000 * np.random.rand(num_samples, 800)
+    features_low_level = 3000 * np.random.rand(num_samples, num_features - 4)
     features = np.concatenate([features_x, features_y, features_v, features_rcs, features_low_level], axis=1)   
     labels = np.random.randint(4,size=(num_samples)) 
     num_targets_per_frame = 20
