@@ -129,7 +129,65 @@ class conv_module_1D(nn.Module):
         features = self.BN(features)
         return features
 
+class TargetMLP(nn.Module):
 
+    def __init__(self, num_classes = 4, high_dims = 4):
+        # The default low-level is 32-d vector cropped from radar cube
+        # The default high-level is  0:x  1:y  2:vel  3:range  4:rcs  5:VrelRadVar  6:angle  7:abs_vel
+        # The default num_classes is four: others, pedestrian, biker, car 
+        super(TargetMLP, self).__init__()
+        self.num_classes = num_classes
+        self.high_dims = high_dims
+        c_in0 = high_dims
+        c_out1 = 128
+        self.FCN0 = nn.Conv1d(
+                in_channels= c_in0, 
+                out_channels=c_out1, 
+                kernel_size=1, 
+                stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros')
+        self.ReLU0 = nn.ReLU()
+        self.Dropout0 = nn.Dropout()
+
+        c_in1 = c_out1
+        c_out2 = 128
+        self.FCN1 = nn.Conv1d(
+                in_channels= c_in1, 
+                out_channels=c_out2, 
+                kernel_size=1, 
+                stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros')
+
+        self.ReLU1 = nn.ReLU()
+        self.Dropout1 = nn.Dropout()
+        c_in2 = c_out2
+        self.FCN2 = nn.Conv1d(
+                in_channels=c_in2, 
+                out_channels=num_classes, 
+                kernel_size=1, 
+                stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros')
+        
+        
+
+    def forward(self, features):
+        features = features.view(-1, 1, self.high_dims)
+
+        features = features.transpose(1,2).contiguous()
+
+        features = self.FCN0(features)
+
+        features = self.ReLU0(features)
+
+        features = self.Dropout0(features)
+
+        features = self.FCN1(features)
+
+        features = self.ReLU1(features)
+
+        features = self.Dropout1(features)
+
+        features = self.FCN2(features)
+
+
+        return features
 
 class RTCnet(nn.Module):
     """
